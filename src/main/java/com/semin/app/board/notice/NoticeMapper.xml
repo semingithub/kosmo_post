@@ -7,5 +7,10 @@
 	<select id="list" resultType="NoticeDTO">
 		select * from "TB_NOTICE"
 	</select>
+	
+	<insert id="create" parameterType="NoticeDTO">
+		insert into "TB_NOTICE"
+		values(DEFAULT, #{boardTitle}, #{boardWriter}, #{boardContents}, NOW(), 0)
+	</insert>
 
 </mapper>
