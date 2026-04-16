@@ -10,19 +10,34 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.semin.app.board.BoardDTO;
 
-import lombok.extern.slf4j.Slf4j;
 
 @SpringBootTest
 class QnaMapperTest {
 
 	@Autowired
 	private QnaMapper qnaMapper;
-	
+
 	@Test
 	void testList() throws Exception {
 		List<BoardDTO> li = qnaMapper.list();
 		System.out.println(li);
 		assertNotEquals(0, li);
+	}
+
+	@Test
+	void testCreate() throws Exception {
+		for (int i = 0; i < 23; i++) {
+			QnaDTO qnaDTO = new QnaDTO();
+			qnaDTO.setBoardTitle("Q&A Title" + i);
+			qnaDTO.setBoardWriter("Q&A Writer" + i);
+			qnaDTO.setBoardContents("Q&A Contetns" + i);		
+			qnaMapper.create(qnaDTO);
+			if(i%3 == 0) {
+				Thread.sleep(500);
+			}
+			
+		}
+		System.out.println("finish");
 	}
 
 }

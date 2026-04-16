@@ -12,13 +12,12 @@ import org.springframework.test.annotation.Commit;
 import com.semin.app.board.BoardDTO;
 
 @SpringBootTest
-@Commit
 class NoticeMapperTest {
 
 	@Autowired
 	private NoticeMapper noticeMapper;
 	
-	//@Test
+	@Test
 	void testList() throws Exception {
 		List<BoardDTO> li = noticeMapper.list();
 		assertNotEquals(0, li);
