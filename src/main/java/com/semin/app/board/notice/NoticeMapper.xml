@@ -4,10 +4,28 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.semin.app.board.notice.NoticeMapper">
 
-	<select id="list" resultType="NoticeDTO">
-		select * from "TB_NOTICE"
-	</select>
+	<sql id="search_sql">
+		where
+		<choose>
+			<when test="kind == 'v2'">"BOARD_CONTENTS"</when>
+			<when test="kind == 'v3'">"BOARD_WRITER"</when>
+			<otherwise>"BOARD_TITLE"</otherwise>
+		</choose>
+		like concat('%', #{search}, '%')
+	</sql>
 	
+	<select id="getCount" resultType="Long" parameterType="Pager">
+		select count("BOARD_NUM") from "TB_NOTICE"
+		<include refid="search_sql"></include>
+	</select>
+
+	<select id="list" resultType="NoticeDTO" parameterType="Pager">
+		select * from "TB_NOTICE"
+		<include refid="search_sql"></include>
+		order by "BOARD_NUM" DESC
+		limit #{perPage} offset #{startNum}
+	</select>
+
 	<insert id="create" parameterType="NoticeDTO">
 		insert into "TB_NOTICE"
 		values(DEFAULT, #{boardTitle}, #{boardWriter}, #{boardContents}, NOW(), 0)

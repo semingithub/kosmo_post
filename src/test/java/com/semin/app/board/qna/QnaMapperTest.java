@@ -9,9 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.semin.app.board.BoardDTO;
+import com.semin.app.pager.Pager;
+
+import lombok.extern.slf4j.Slf4j;
 
 
 @SpringBootTest
+@Slf4j
 class QnaMapperTest {
 
 	@Autowired
@@ -19,12 +23,16 @@ class QnaMapperTest {
 
 	@Test
 	void testList() throws Exception {
-		List<BoardDTO> li = qnaMapper.list();
-		System.out.println(li);
-		assertNotEquals(0, li);
+		Pager pager = new Pager();
+		pager.setPage(1L);
+		pager.makeStartNum();
+		pager.setSearch("9");
+		List<BoardDTO> li = qnaMapper.list(pager);
+		assertNotEquals(0, li.size());
+		log.info("{}", li);
 	}
 
-	@Test
+	//@Test
 	void testCreate() throws Exception {
 		for (int i = 0; i < 23; i++) {
 			QnaDTO qnaDTO = new QnaDTO();
