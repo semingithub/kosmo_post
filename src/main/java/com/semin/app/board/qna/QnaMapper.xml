@@ -14,7 +14,7 @@
 		</choose>
 		like concat('%', #{search}, '%')
 	</sql>
-	
+
 	<select id="getCount" resultType="Long" parameterType="Pager">
 		select count("BOARD_NUM") from "TB_QNA"
 		<include refid="search_sql"></include>
@@ -27,9 +27,14 @@
 		limit #{perPage} offset #{startNum}
 	</select>
 
-	<insert id="create" parameterType="QnaDTO">
+	<insert id="create" parameterType="QnaDTO" useGeneratedKeys="true" keyProperty="boardNum">
 		insert into "TB_QNA"
 		values(DEFAULT, #{boardTitle}, #{boardWriter}, #{boardContents}, NOW(), 0, 0 ,0 ,0)
+	</insert>
+
+	<insert id="createFile" parameterType="QnaFileDTO">
+		insert into "TB_QNAFILE"
+		values(DEFAULT, #{fileName}, #{oriName}, #{boardNum})
 	</insert>
 
 </mapper>

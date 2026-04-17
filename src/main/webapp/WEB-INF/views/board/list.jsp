@@ -18,7 +18,7 @@
 					<h1 class="h3 mb-4 text-gray-800">${name} List Page</h1>
 					<button class="btn btn-primary" onclick="location.href='./create'">추가</button>
 					<div class="row justify-content-center">
-						<div class="col-6">
+						<div class="col-10">
 							<!-- 검색 폼 -->
 							<div>
 								<form action="./list" method="get">

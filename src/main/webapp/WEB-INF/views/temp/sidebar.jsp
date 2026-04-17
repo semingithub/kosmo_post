@@ -37,7 +37,7 @@
 		<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
 			data-parent="#accordionSidebar">
 			<div class="bg-white py-2 collapse-inner rounded">
-				<a class="collapse-item" href="/notice/list">공지사항</a> <a
+				<a class="collapse-item" href="/board/list">공지사항</a> <a
 					class="collapse-item" href="/qna/list">Q&A</a>
 			</div>
 		</div></li>

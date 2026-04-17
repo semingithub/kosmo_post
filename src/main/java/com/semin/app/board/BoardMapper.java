@@ -2,6 +2,7 @@ package com.semin.app.board;
 
 import java.util.List;
 
+import com.semin.app.file.FileDTO;
 import com.semin.app.pager.Pager;
 
 public interface BoardMapper {
@@ -17,5 +18,7 @@ public interface BoardMapper {
 	public int delete(BoardDTO boardDTO) throws Exception;
 	
 	public Long getCount(Pager pager) throws Exception;
+	
+	public int createFile(FileDTO fileDTO) throws Exception;
 	
 }

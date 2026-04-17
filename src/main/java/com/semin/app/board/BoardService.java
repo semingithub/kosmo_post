@@ -3,6 +3,7 @@ package com.semin.app.board;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.semin.app.pager.Pager;
 
@@ -13,7 +14,7 @@ public interface BoardService {
 
 	public BoardDTO detail(BoardDTO boardDTO) throws Exception;
 
-	public int create(BoardDTO boardDTO) throws Exception;
+	public int create(BoardDTO boardDTO, MultipartFile[] attach) throws Exception;
 
 	public int update(BoardDTO boardDTO) throws Exception;
 
