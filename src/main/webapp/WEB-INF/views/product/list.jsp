@@ -1,0 +1,68 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>상품 리스트 페이지</h1>
+	<button type="button" class="btn btn-dark" onclick="location.href='./create'">상품 추가</button>
+	<form action="./list" method="get">
+		<div class="input-group mb-3">
+			<div class="input-group-prepend">
+				<select name="kind" class="custom-select">
+					<option ${productPager.kind eq 'v1'? 'selected' : '' } value="v1">이름</option>
+					<option ${productPager.kind eq 'v2'? 'selected' : '' } value="v2">종류</option>
+				</select>
+			</div>
+			<input type="text" value="${productPager.search}" name="search" class="form-control" placeholder="검색할 상품 정보를 입력하세요." aria-label="Recipient's username" aria-describedby="button-addon2">
+			<div class="input-group-append">
+				<button class="btn btn-outline-secondary" type="submit" id="button-addon2">검색</button>
+			</div>
+		</div>
+	</form>
+	<div class="row justify-content-center">
+		<c:forEach items="${list}" var="l">
+			<div class="col-md-4 mb-4 d-flex justify-content-center">
+				<div class="card" style="width: 300px;">
+					<img src="/files/product/${l.fileName}" class="card-img-top p-2" style="height: 200px; width: 100%; object-fit: contain;">
+					<div class="card-body text-center">
+						<h5 class="card-title">${l.productName}</h5>
+						<p class="card-text">상품 종류: ${l.productType}</p>
+						<c:choose>
+							<c:when test="${l.productType eq '대출'}">
+								<p class="card-text">최저금리: 연 ${l.productRate}%</p>
+							</c:when>
+							<c:otherwise>
+								<p class="card-text">최고금리: 연 ${l.productRate}%</p>
+							</c:otherwise>
+						</c:choose>
+						<button type="button" class="btn btn-dark" onclick="location.href='./detail?productNo=${l.productNo}'">자세히 보기</button>
+					</div>
+				</div>
+			</div>
+		</c:forEach>
+	</div>
+	<div class="row justify-content-center">
+		<nav aria-label="Page navigation example">
+			<ul class="pagination">
+				<li class="page-item ${productPager.pre?'':'disabled'}"><a class="page-link" href="./list?page=${productPager.pre ? productPager.start-1 : productPager.start}&search=${productPager.search}&kind=${productPager.kind}" aria-label="Previous">
+						<span aria-hidden="true">&laquo;</span>
+				</a></li>
+				<c:forEach begin="${productPager.start}" end="${productPager.end}" var="i">
+					<li class="page-item"><a class="page-link" href="./list?page=${i}&search=${productPager.search}&kind=${productPager.kind}">${i}</a></li>
+				</c:forEach>
+				<li class="page-item ${productPager.next?'':'disabled'}"><a class="page-link" href="./list?page=${productPager.next ? productPager.end+1 : productPager.end}&search=${productPager.search}&kind=${productPager.kind}" aria-label="Next"> <span
+						aria-hidden="true"
+					>&raquo;</span>
+				</a></li>
+			</ul>
+		</nav>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

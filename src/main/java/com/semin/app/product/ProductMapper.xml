@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.semin.app.product.ProductMapper">
+
+	<sql id="search_sql">
+		where
+		<choose>
+			<when test="kind == 'v2'">"PRODUCT_TYPE"</when>
+			<otherwise>"PRODUCT_NAME"</otherwise>
+		</choose>
+		like concat('%', #{search}, '%')
+	</sql>
+
+	<select id="getCount" resultType="Long" parameterType="Pager">
+		select count("PRODUCT_NO") from "TB_PRODUCT"
+		<include refid="search_sql"></include>
+	</select>
+
+	<select id="list" resultType="ProductDTO" parameterType="Pager">
+		select p.*, f."FILE_NAME"
+		from "TB_PRODUCT" p
+		left join "TB_PRODUCTFILE" f
+		on p."PRODUCT_NO" = f."PRODUCT_NO"
+		<include refid="search_sql"></include>
+		order by p."PRODUCT_NO" DESC
+		limit #{perPage} offset #{startNum}
+	</select>
+
+	<select id="detail" resultMap="detailResult" parameterType="ProductDTO">
+		select * from "TB_PRODUCT" p
+		left join "TB_PRODUCTFILE" f
+		using("PRODUCT_NO")
+		where "PRODUCT_NO" = #{productNo}
+	</select>
+
+	<resultMap type="ProductDTO" id="detailResult">
+		<!-- ID = Primary Key -->
+		<id column="PRODUCT_NO" property="productNo"/>
+		<!-- 그외 나머지 -->
+		<result column="PRODUCT_NAME" property="productName"/>
+		<result column="PRODUCT_CONTENTS" property="productContents"/>
+		<result column="PRODUCT_TYPE" property="productType"/>
+		<result column="PRODUCT_RATE" property="productRate"/>
+		<association property="file" javaType="ProductFileDTO">
+			<id column="FILE_NUM" property="fileNum"/>
+			<result column="FILE_NAME" property="fileName"/>
+			<result column="ORI_NAME" property="oriName"/>
+		</association>
+	</resultMap>
+
+	<insert id="create" parameterType="ProductDTO" useGeneratedKeys="true" keyProperty="productNo">
+		insert into "TB_PRODUCT"
+		values(default, #{productName}, #{productContents}, #{productType}, #{productRate})
+	</insert>
+
+	<insert id="createFile" parameterType="ProductFileDTO">
+		insert into "TB_PRODUCTFILE"
+		values(DEFAULT, #{fileName}, #{oriName}, #{productNo})
+	</insert>
+
+</mapper>
