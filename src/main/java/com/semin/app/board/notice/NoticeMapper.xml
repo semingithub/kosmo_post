@@ -13,7 +13,7 @@
 		</choose>
 		like concat('%', #{search}, '%')
 	</sql>
-	
+
 	<select id="getCount" resultType="Long" parameterType="Pager">
 		select count("BOARD_NUM") from "TB_NOTICE"
 		<include refid="search_sql"></include>
@@ -30,10 +30,31 @@
 		insert into "TB_NOTICE"
 		values(DEFAULT, #{boardTitle}, #{boardWriter}, #{boardContents}, NOW(), 0)
 	</insert>
-	
+
 	<insert id="createFile" parameterType="NoticeFileDTO">
 		insert into "TB_NOTICEFILE"
 		values(DEFAULT, #{fileName}, #{oriName}, #{boardNum})
 	</insert>
+
+	<select id="detail" parameterType="NoticeDTO" resultMap="detailResult">
+		select * from "TB_NOTICE" n
+		left join "TB_NOTICEFILE" f
+		using("BOARD_NUM")
+		where "BOARD_NUM" = #{boardNum}
+	</select>
+
+	<resultMap type="NoticeDTO" id="detailResult">
+		<id column="BOARD_NUM" property="boardNum"/>
+		<result column="BOARD_TITLE" property="boardTitle"/>
+		<result column="BOARD_WRITER" property="boardWriter"/>
+		<result column="BOARD_CONTENTS" property="boardContents"/>
+		<result column="BOARD_DATE" property="boardDate"/>
+		<result column="BOARD_HITS" property="boardHits"/>
+		<collection property="list" javaType="java.util.List" ofType="FileDTO">
+			<id column="FILE_NUM" property="fileNum"/>
+			<result column="FILE_NAME" property="fileName"/>
+			<result column="ORI_NAME" property="oriName"/>
+		</collection>
+	</resultMap>
 
 </mapper>

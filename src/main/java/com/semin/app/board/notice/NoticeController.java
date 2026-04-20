@@ -3,9 +3,11 @@ package com.semin.app.board.notice;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +22,14 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/board/*")
 @Slf4j
 public class NoticeController {
+	
+	@Value("${app.board.notice}")
+	public String image;
+	
+	@ModelAttribute("image")
+	public String getName() {
+		return this.image;
+	}
 
 	@Autowired
 	private NoticeService noticeService;
@@ -43,6 +53,15 @@ public class NoticeController {
 		int result = noticeService.create(noticeDTO, attach);
 
 		return "redirect:./list";
+	}
+
+	@GetMapping("detail")
+	public String detail(NoticeDTO noticeDTO, Model model) throws Exception {
+		BoardDTO boardDTO = noticeService.detail(noticeDTO);
+		model.addAttribute("detail", boardDTO);
+		
+
+		return "board/detail";
 	}
 
 }

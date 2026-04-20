@@ -52,7 +52,7 @@
 										<tr>
 											<td>${l.boardNum}</td>
 											<td>
-												<a href="./detail?noticeNo=${l.boardNum}">
+												<a href="./detail?boardNum=${l.boardNum}">
 													<c:catch>
 														<c:forEach begin="1" end="${l.boardDepth}">--</c:forEach>
 													</c:catch>

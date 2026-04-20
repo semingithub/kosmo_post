@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +18,11 @@ import com.semin.app.pager.Pager;
 @Controller
 @RequestMapping("/qna/*")
 public class QnaController {
+	
+	@ModelAttribute("image")
+	public String getName() {
+		return "qna";
+	}
 
 	@Autowired
 	private QnaService qnaService;
@@ -38,8 +44,15 @@ public class QnaController {
 	@PostMapping("create")
 	public String create(QnaDTO qnaDTO, @RequestParam("attach") MultipartFile[] attach) throws Exception {
 		int result = qnaService.create(qnaDTO, attach);
-		
+
 		return "redirect:./list";
+	}
+
+	@GetMapping("detail")
+	public String detail(QnaDTO qnaDTO, Model model) throws Exception {
+		BoardDTO boardDTO = qnaService.detail(qnaDTO);
+		model.addAttribute("detail", boardDTO);
+		return "board/detail";
 	}
 
 }

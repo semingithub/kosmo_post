@@ -1,6 +1,9 @@
 package com.semin.app.board;
 
 import java.time.LocalDateTime;
+import java.util.List;
+
+import com.semin.app.file.FileDTO;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -17,6 +20,8 @@ public class BoardDTO {
 	private String boardContents;
 	private LocalDateTime boardDate;
 	private Long boardHits;
+	
+	private List<FileDTO> list;
 	
 
 }
