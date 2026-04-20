@@ -7,9 +7,31 @@
 		insert into "TB_MEMBER"
 		values(#{username}, #{name}, #{password}, #{phone}, #{email}, #{birth})
 	</insert>
-	
+
 	<insert id="addProfile" parameterType="ProfileDTO">
 		insert into "PROFILE"
 		values(default, #{fileName}, #{oriName}, #{username})
 	</insert>
+
+	<select id="detail" parameterType="MemberDTO" resultMap="detailResult">
+		select * from "TB_MEMBER" as m
+		left join "PROFILE" f
+		using("USERNAME")
+		where "USERNAME" = #{username}
+	</select>
+
+	<resultMap type="MemberDTO" id="detailResult">
+		<id column="USERNAME" property="username"/>
+		<result column="NAME" property="name"/>
+		<result column="PASSWORD" property="password"/>
+		<result column="PHONE" property="phone"/>
+		<result column="EMAIL" property="email"/>
+		<result column="BIRTH" property="birth"/>
+		<association property="profileDTO" javaType="ProfileDTO">
+			<id column="FILE_NUM" property="fileNum"/>
+			<result column="FILE_NAME" property="fileName"/>
+			<result column="ORI_NAME" property="oriName"/>
+		</association>
+	</resultMap>
+	
 </mapper>
