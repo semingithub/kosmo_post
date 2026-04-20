@@ -17,7 +17,7 @@
 				<div class="container-fluid">
 					<h1 class="h3 mb-4 text-gray-800">Detail Page</h1>
 					<div style="display: inline;">
-						<button class="btn btn-primary" onclick="location.href='./update?departmentNo=${detail.boardNum}'">수정</button>
+						<button class="btn btn-primary" onclick="location.href='./update?boardNum=${detail.boardNum}'">수정</button>
 					</div>
 					<button class="btn btn-primary" onclick="location.href='./list'">뒤로가기</button>
 					<div class="row justify-content-center">
@@ -30,7 +30,7 @@
 							</c:forEach>
 							<div>
 								<form action="./delete" method="post">
-									<input type="hidden" name="departmentNo" value="${detail.boardNum}">
+									<input type="hidden" name="boardNum" value="${detail.boardNum}">
 									<button type="submit" class="btn btn-outline-danger">삭제</button>
 								</form>
 							</div>

@@ -22,10 +22,10 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/board/*")
 @Slf4j
 public class NoticeController {
-	
+
 	@Value("${app.board.notice}")
 	public String image;
-	
+
 	@ModelAttribute("image")
 	public String getName() {
 		return this.image;
@@ -59,9 +59,29 @@ public class NoticeController {
 	public String detail(NoticeDTO noticeDTO, Model model) throws Exception {
 		BoardDTO boardDTO = noticeService.detail(noticeDTO);
 		model.addAttribute("detail", boardDTO);
-		
 
 		return "board/detail";
 	}
 
+	@GetMapping("update")
+	public String update(NoticeDTO noticeDTO, Model model) throws Exception {
+		BoardDTO boardDTO = noticeService.detail(noticeDTO);
+		model.addAttribute("detail", boardDTO);
+
+		return "board/update";
+	}
+
+	@PostMapping("update")
+	public String update(NoticeDTO noticeDTO, @RequestParam("attach") MultipartFile[] attach) throws Exception {
+		int result = noticeService.update(noticeDTO, attach);
+		return "redirect:./list";
+	}
+
+	@PostMapping("delete")
+	public String delete(NoticeDTO noticeDTO) throws Exception {
+		
+		int result = noticeService.delete(noticeDTO);
+		
+		return "redirect:./list";
+	}
 }

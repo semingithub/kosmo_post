@@ -58,7 +58,32 @@
 			<id column="FILE_NUM" property="fileNum"/>
 			<result column="FILE_NAME" property="fileName"/>
 			<result column="ORI_NAME" property="oriName"/>
-		</collection>		
+		</collection>
 	</resultMap>
 
+	<update id="update" parameterType="QnaDTO">
+		update "TB_QNA"
+		set
+		"BOARD_TITLE" = #{boardTitle},
+		"BOARD_CONTENTS" = #{boardContents}
+		where "BOARD_NUM" = #{boardNum}
+	</update>
+
+	<delete id="delete" parameterType="QnaDTO">
+		delete from "TB_QNA"
+		where "BOARD_NUM" = #{boardNum}
+	</delete>
+
+	<delete id="fileDelete" parameterType="FileDTO">
+		delete from "TB_QNAFILE"
+		where "FILE_NUM" = #{fileNum}
+	</delete>
+
+	<delete id="fileDeleteFor" parameterType="java.util.List">
+		delete from "TB_QNAFILE"
+		where "FILE_NUM" in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item.fileNum}
+		</foreach>
+	</delete>
 </mapper>

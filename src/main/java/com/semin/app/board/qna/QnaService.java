@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.semin.app.board.BoardDTO;
 import com.semin.app.board.BoardService;
+import com.semin.app.file.FileDTO;
 import com.semin.app.file.FileManager;
 import com.semin.app.pager.Pager;
 
@@ -64,15 +65,26 @@ public class QnaService implements BoardService {
 	}
 
 	@Override
-	public int update(BoardDTO boardDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+	public int update(BoardDTO boardDTO, MultipartFile[] attach) throws Exception {
+		int result = qnaMapper.update(boardDTO);
+		return result;
 	}
 
 	@Override
 	public int delete(BoardDTO boardDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		// DB에서 삭제
+		boardDTO = qnaMapper.detail(boardDTO);
+
+		// HDD에서 삭제
+		for (FileDTO fileDTO : boardDTO.getList()) {
+			fileManager.fileDelete(name, fileDTO);
+//			qnaMapper.fileDelete(fileDTO);
+		}
+		
+		qnaMapper.fileDeleteFor(boardDTO.getList());
+
+		int result = qnaMapper.delete(boardDTO);
+		return result;
 	}
 
 }

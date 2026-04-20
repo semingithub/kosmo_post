@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.semin.app.board.BoardDTO;
+import com.semin.app.board.notice.NoticeDTO;
 import com.semin.app.pager.Pager;
 
 @Controller
@@ -53,6 +54,27 @@ public class QnaController {
 		BoardDTO boardDTO = qnaService.detail(qnaDTO);
 		model.addAttribute("detail", boardDTO);
 		return "board/detail";
+	}
+	
+	@GetMapping("update")
+	public String update(QnaDTO qnaDTO, Model model) throws Exception {
+		BoardDTO boardDTO = qnaService.detail(qnaDTO);
+		model.addAttribute("detail", boardDTO);
+		return 	"board/update";
+	}
+	
+	@PostMapping("update")
+	public String update(QnaDTO qnaDTO,@RequestParam("attach") MultipartFile[] attach) throws Exception{
+		int result = qnaService.update(qnaDTO, attach);
+		return "redirect:./list";		
+	}
+	
+	@PostMapping("delete")
+	public String delete(QnaDTO qnaDTO) throws Exception {
+		
+		int result = qnaService.delete(qnaDTO);
+		
+		return "redirect:./list";
 	}
 
 }

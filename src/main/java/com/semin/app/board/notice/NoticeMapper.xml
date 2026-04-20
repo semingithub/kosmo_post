@@ -56,5 +56,18 @@
 			<result column="ORI_NAME" property="oriName"/>
 		</collection>
 	</resultMap>
+	
+	<update id="update" parameterType="NoticeDTO">
+		update "TB_NOTICE"
+		set 
+			"BOARD_TITLE" = #{boardTitle},
+			"BOARD_CONTENTS" = #{boardContents}
+		where "BOARD_NUM" = #{boardNum}
+	</update>
+	
+	<delete id="delete" parameterType="NoticeDTO">
+		delete from "TB_NOTICE"
+		where "BOARD_NUM" = #{boardNum}
+	</delete>
 
 </mapper>

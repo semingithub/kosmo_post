@@ -13,6 +13,14 @@ public class FileManager {
 
 	@Value("${app.upload.base}")
 	private String path;
+	
+	public boolean fileDelete(String name, FileDTO fileDTO) throws Exception {
+		File file = new File(path, name); // C:/upload/notice
+		file = new File(file, fileDTO.getFileName()); // ***./jpg 파일명
+		
+		return file.delete();
+		
+	}
 
 	public String fileSave(String name, MultipartFile mf) throws Exception {
 		// 1. 저장 위치
