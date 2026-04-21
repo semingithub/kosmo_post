@@ -20,7 +20,9 @@
 					<div class="d-flex justify-content-between align-items-center mb-4">
 						<h1 class="text-dark">상품 상세내역 페이지</h1>
 						<div>
-							<button type="button" class="btn btn-outline-primary" onclick="location.href='/account/create?productNo=${detail.productNo}'">상품 가입</button>
+							<c:if test="${not empty member}">
+								<button type="button" class="btn btn-outline-primary" onclick="location.href='/account/create?productNo=${detail.productNo}'">상품 가입</button>
+							</c:if>
 							<button type="button" class="btn btn-outline-danger" onclick="location.href='./list'">뒤로가기</button>
 						</div>
 					</div>
@@ -48,7 +50,6 @@
 		<!-- End wrapper -->
 	</div>
 	<c:import url="/WEB-INF/views/temp/footer_script.jsp"></c:import>
-	<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

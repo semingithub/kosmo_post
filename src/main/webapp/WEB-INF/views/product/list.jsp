@@ -4,8 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<c:import url="/WEB-INF/views/temp/head_css.jsp"></c:import>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<c:import url="/WEB-INF/views/temp/head_css.jsp"></c:import>
 <title>Insert title here</title>
 </head>
 <body id="page-top">
@@ -86,7 +86,6 @@
 		</div>
 		<!-- End wrapper -->
 	</div>
-	<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 	<c:import url="/WEB-INF/views/temp/footer_script.jsp"></c:import>
 </body>
