@@ -16,26 +16,29 @@
 				<c:import url="/WEB-INF/views/temp/topbar.jsp"></c:import>
 				<!-- Page Content  -->
 				<div class="container-fluid">
-					<h1 class="h3 mb-4 text-gray-800">
-						<h1>상품 상세내역 페이지</h1>
-						<button type="button" class="btn btn-dark" onclick="location.href='./list'">뒤로가기</button>
-						<div class="row justify-content-center">
-							<div class="d-flex align-items-start">
-								<img src="/files/product/${detail.file.fileName}" class="mr-3 flex-shrink-0" alt="...">
-
-								<div>
-									<h1>
-										<span class="badge badge-secondary">${detail.productType}</span>
-										${detail.productName}
-									</h1>
-									<p>${detail.productContents}</p>
-								</div>
+					<!-- 제목 + 버튼 영역 -->
+					<div class="d-flex justify-content-between align-items-center mb-4">
+						<h1 class="text-dark">상품 상세내역 페이지</h1>
+						<div>
+							<button type="button" class="btn btn-outline-primary" onclick="location.href='/account/create?productNo=${detail.productNo}'">상품 가입</button>
+							<button type="button" class="btn btn-outline-danger" onclick="location.href='./list'">뒤로가기</button>
+						</div>
+					</div>
+					<!-- 상품 내용 -->
+					<div class="row justify-content-center">
+						<div class="d-flex align-items-start">
+							<!-- 이미지 -->
+							<img src="/files/product/${detail.file.fileName}" class="mr-4" style="width: 400px; height: auto;" alt="상품 이미지">
+							<!-- 텍스트 -->
+							<div>
+								<h2 class="mb-3">
+									<span class="badge badge-secondary">${detail.productType}</span>
+									${detail.productName}
+								</h2>
+								<p>${detail.productContents}</p>
 							</div>
 						</div>
-						<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
-						<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-					</h1>
-					<!-- End Page Content container-fluid-->
+					</div>
 				</div>
 				<!-- End Content-->
 			</div>
@@ -45,5 +48,7 @@
 		<!-- End wrapper -->
 	</div>
 	<c:import url="/WEB-INF/views/temp/footer_script.jsp"></c:import>
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

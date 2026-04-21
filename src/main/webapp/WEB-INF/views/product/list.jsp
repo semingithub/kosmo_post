@@ -16,9 +16,10 @@
 				<c:import url="/WEB-INF/views/temp/topbar.jsp"></c:import>
 				<!-- Page Content  -->
 				<div class="container-fluid">
-					<h1 class="h3 mb-4 text-gray-800">
-						<h1>상품 리스트 페이지</h1>
-						<button type="button" class="btn btn-dark" onclick="location.href='./create'">상품 추가</button>
+						<div style="display: flex; justify-content: space-between; align-items: center;">
+							<h1>상품 리스트 페이지</h1>
+							<button type="button" class="btn btn-outline-primary" onclick="location.href='./create'">상품 추가</button>
+						</div>
 						<form action="./list" method="get">
 							<div class="input-group mb-3">
 								<div class="input-group-prepend">
@@ -76,7 +77,6 @@
 								</ul>
 							</nav>
 						</div>
-					</h1>
 					<!-- End Page Content container-fluid-->
 				</div>
 				<!-- End Content-->
@@ -86,8 +86,8 @@
 		</div>
 		<!-- End wrapper -->
 	</div>
-	<c:import url="/WEB-INF/views/temp/footer_script.jsp"></c:import>
 	<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+	<c:import url="/WEB-INF/views/temp/footer_script.jsp"></c:import>
 </body>
 </html>
