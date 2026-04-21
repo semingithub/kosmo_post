@@ -154,7 +154,7 @@
 				</a>
 				<!-- Dropdown - User Information -->
 				<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-					<a class="dropdown-item" href="#">
+					<a class="dropdown-item" href="/member/mypage">
 						<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
 						Profile
 					</a>
@@ -177,7 +177,7 @@
 		</c:if>
 		<c:if test="${empty member}">
 			<li class="nav-item">
-				<a href="/member/login" style="margin-right: 10px">
+				<a href="/member/login" style="margin-right: 20px">
 					<i class="fas fa-sign-in-alt"></i>
 				</a>
 			</li>
