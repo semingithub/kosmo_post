@@ -4,14 +4,14 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.semin.app.product.pager.ProductPager;
+import com.semin.app.pager.Pager;
 
 @Mapper
 public interface ProductMapper {
 	
-	public List<ProductDTO> list(ProductPager productPager) throws Exception;
+	public List<ProductDTO> list(Pager pager) throws Exception;
 	
-	public Long getCount(ProductPager productPager) throws Exception;
+	public Long getCount(Pager pager) throws Exception;
 	
 	public int create(ProductDTO productDTO) throws Exception;
 	

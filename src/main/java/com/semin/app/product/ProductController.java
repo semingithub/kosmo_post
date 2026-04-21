@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.semin.app.pager.Pager;
-import com.semin.app.product.pager.ProductPager;
 
 @Controller
 @RequestMapping("/product/*")
@@ -22,8 +21,8 @@ public class ProductController {
 	private ProductService productService;
 
 	@GetMapping("list")
-	public String list(ProductPager productPagerager, Model model) throws Exception {
-		List<ProductDTO> li = productService.list(productPagerager);
+	public String list(Pager pager, Model model) throws Exception {
+		List<ProductDTO> li = productService.list(pager);
 		model.addAttribute("list", li);
 		return "product/list";
 	}
