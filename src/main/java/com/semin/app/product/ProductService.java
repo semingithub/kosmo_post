@@ -9,7 +9,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.semin.app.file.FileManager;
 import com.semin.app.pager.Pager;
-import com.semin.app.product.pager.ProductPager;
 
 @Service
 public class ProductService {
@@ -23,10 +22,11 @@ public class ProductService {
 	@Value("${app.product}")
 	private String name;
 
-	public List<ProductDTO> list(ProductPager productPager) throws Exception {
-		productPager.makePageNum(productMapper.getCount(productPager));
-		productPager.makeStartNum();
-		return productMapper.list(productPager);
+	public List<ProductDTO> list(Pager pager) throws Exception {
+		pager.setPerPage(6L);
+		pager.makePageNum(productMapper.getCount(pager));
+		pager.makeStartNum();
+		return productMapper.list(pager);
 	}
 	
 	public int create(ProductDTO productDTO, MultipartFile attach) throws Exception{

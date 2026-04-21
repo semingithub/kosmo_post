@@ -15,6 +15,7 @@ public class ProductDTO {
 	private String productType;
 	private Double productRate;
 	private String fileName;
+	
 	private ProductFileDTO file;
 
 }

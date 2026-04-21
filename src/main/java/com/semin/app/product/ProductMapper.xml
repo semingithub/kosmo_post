@@ -13,12 +13,12 @@
 		like concat('%', #{search}, '%')
 	</sql>
 
-	<select id="getCount" resultType="Long" parameterType="Pager">
+	<select id="getCount" resultType="Long" parameterType="productPager">
 		select count("PRODUCT_NO") from "TB_PRODUCT"
 		<include refid="search_sql"></include>
 	</select>
 
-	<select id="list" resultType="ProductDTO" parameterType="Pager">
+	<select id="list" resultType="ProductDTO" parameterType="productPager">
 		select p.*, f."FILE_NAME"
 		from "TB_PRODUCT" p
 		left join "TB_PRODUCTFILE" f
