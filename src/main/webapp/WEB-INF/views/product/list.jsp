@@ -28,7 +28,7 @@
 		<c:forEach items="${list}" var="l">
 			<div class="col-md-4 mb-4 d-flex justify-content-center">
 				<div class="card" style="width: 300px;">
-					<img src="/files/product/${l.fileName}" class="card-img-top p-2" style="height: 200px; width: 100%; object-fit: contain;">
+					<img src="/files/${image}/${l.fileName}" class="card-img-top p-2" style="height: 200px; width: 100%; object-fit: contain;">
 					<div class="card-body text-center">
 						<h5 class="card-title">${l.productName}</h5>
 						<p class="card-text">상품 종류: ${l.productType}</p>
