@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.semin.app.cart.CartMapper">
+	<insert id="create">
+		insert into "TB_CART"
+		values(#{username}, #{productNo})
+	</insert>
+
+	<select id="list" resultMap="cartResult" parameterType="MemberDTO">
+		select * from "TB_CART" c
+		inner join "TB_PRODUCT" p
+		using("PRODUCT_NO")
+		left join
+		"TB_PRODUCTFILE" f
+		using("PRODUCT_NO")
+		where "USERNAME" = #{username}
+	</select>
+
+	<resultMap type="ProductDTO" id="cartResult">
+		<id column="PRODUCT_NO" property="productNo"/>
+		<result column="PRODUCT_NAME" property="productName"/>
+		<result column="PRODUCT_CONTENTS" property="productContents"/>
+		<result column="PRODUCT_TYPE" property="productType"/>
+		<result column="PRODUCT_RATE" property="productRate"/>
+		<association property="file" javaType="ProductFileDTO">
+			<id column="FILE_NUM" property="fileNum"/>
+			<result column="FILE_NAME" property="fileName"/>
+			<result column="ORI_NAME" property="oriName"/>
+		</association>
+	</resultMap>
+
+</mapper>

@@ -22,6 +22,7 @@
 						<div>
 							<c:if test="${not empty member}">
 								<button type="button" class="btn btn-outline-primary" onclick="location.href='/account/create?productNo=${detail.productNo}'">상품 가입</button>
+								<button id="btn" data-no="${detail.productNo}" class="btn btn-outline-primary">장바구니</button>
 							</c:if>
 							<button type="button" class="btn btn-outline-danger" onclick="location.href='./list'">뒤로가기</button>
 						</div>
@@ -51,5 +52,6 @@
 	</div>
 	<c:import url="/WEB-INF/views/temp/footer_script.jsp"></c:import>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="/js/cart/cart.js"></script>
 </body>
 </html>
