@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping("/board/*")
 @Slf4j
+@CrossOrigin("*")
 public class NoticeController {
 
 	@Value("${app.board.notice}")
@@ -49,7 +51,7 @@ public class NoticeController {
 	}
 
 	@PostMapping("create")
-	public String create(NoticeDTO noticeDTO, @RequestParam("attach") MultipartFile[] attach, Model model)
+	public String create(NoticeDTO noticeDTO, @RequestParam(value="attach", required=false) MultipartFile[] attach, Model model)
 			throws Exception {
 		int result = noticeService.create(noticeDTO, attach);
 		if (result > 0) {

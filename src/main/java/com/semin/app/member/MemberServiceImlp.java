@@ -54,4 +54,11 @@ public class MemberServiceImlp implements MemberService {
 		
 		return check;
 	}
+
+	@Override
+	public MemberDTO idCheck(MemberDTO memberDTO) throws Exception {
+
+		return memberMapper.detail(memberDTO);
+	}
+
 }

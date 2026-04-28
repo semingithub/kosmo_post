@@ -10,5 +10,8 @@ public interface MemberMapper {
 	public int addProfile(ProfileDTO profileDTO) throws Exception;
 	
 	public MemberDTO detail(MemberDTO memberDTO) throws Exception;
+	
+	public MemberDTO idCheck(String username) throws Exception;
 
+	
 }

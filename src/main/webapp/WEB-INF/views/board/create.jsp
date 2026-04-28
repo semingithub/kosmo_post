@@ -22,23 +22,24 @@
 						<div class="col-8">
 							<form action="./create" method="post" enctype="multipart/form-data">
 								<div class="form-group">
-									<label for="title">제목</label>
-									<input type="text" class="form-control" id="title" name="boardTitle">
+									<label for="boardTitle">제목</label>
+									<input type="text" class="form-control" id="boardTitle" name="boardTitle">
 								</div>
 								<div class="form-group">
-									<label for="writer">작성자</label>
-									<input type="text" class="form-control" id="writer" name="boardWriter">
+									<label for="boardWriter">작성자</label>
+									<input type="text" class="form-control" id="boardWriter" name="boardWriter">
 								</div>
 								<div class="form-group">
-									<label for="contents">내용</label>
-									<textarea rows="" cols="" name="boardContents" class="form-control" id="contents"></textarea>
+									<label for="boardContents">내용</label>
+									<textarea rows="" cols="" name="boardContents" class="form-control" id="boardContents"></textarea>
 								</div>
-								<div class="form-group">
+								<div>
+									<button type="button" id="add">File ADD</button>
+								</div>
+								<div class="form-group" id="result">
 									<label for="attach">첨부파일</label>
-									<input type="file" name="attach" class="form-control">
-									<input type="file" name="attach" class="form-control">
 								</div>
-								<button type="submit" class="btn btn-primary">Submit</button>
+								<button type="submit" class="btn btn-primary" id="create">Submit</button>
 							</form>
 						</div>
 					</div>
@@ -51,10 +52,11 @@
 		</div>
 		<!-- End wrapper -->
 	</div>
+	<script src="/js/board/form.js"></script>
 	<c:import url="/WEB-INF/views/temp/footer_script.jsp"></c:import>
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.js"></script>
 	<script>
-		$('#contents').summernote({
+		$('#boardContents').summernote({
 			placeholder : ' ',
 			tabsize : 2,
 			height : 400
