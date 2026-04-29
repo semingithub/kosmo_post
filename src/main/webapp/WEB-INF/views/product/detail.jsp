@@ -42,6 +42,41 @@
 							</div>
 						</div>
 					</div>
+					<div id="review_list" class="table-responsive">
+						<table class="table table-bordered table-hover text-center">
+							<thead class="thead-dark">
+								<tr>
+									<th>번호</th>
+									<th>내용</th>
+									<th>별점</th>
+									<th>작성시간</th>
+									<th>작성자</th>
+								</tr>
+							</thead>
+							<tbody id="list" data-id="${detail.productNo}">
+							</tbody>
+						</table>
+					</div>
+					<div>
+						<c:if test="${not empty member}">
+							<div id="review_write" data-id="${detail.productNo}">
+								<textarea id="reviewContents" rows="6" class="form-control mb-2"></textarea>
+								<div class="input-group mb-2">
+									<div class="input-group-prepend">
+										<span class="input-group-text">별점</span>
+									</div>
+									<select id="reviewStar" class="form-control">
+										<option value="5">★★★★★</option>
+										<option value="4">★★★★☆</option>
+										<option value="3">★★★☆☆</option>
+										<option value="2">★★☆☆☆</option>
+										<option value="1">★☆☆☆☆</option>
+									</select>
+								</div>
+								<button id="reviewBtn" class="btn btn-primary">등록</button>
+							</div>
+						</c:if>
+					</div>
 				</div>
 				<!-- End Content-->
 			</div>
@@ -53,5 +88,6 @@
 	<c:import url="/WEB-INF/views/temp/footer_script.jsp"></c:import>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="/js/cart/cart.js"></script>
+	<script src="/js/review/review.js"></script>
 </body>
 </html>

@@ -15,7 +15,8 @@
 		left join
 		"TB_PRODUCTFILE" f
 		using("PRODUCT_NO")
-		where "USERNAME" = #{username}
+		where "USERNAME" =
+		#{username}
 	</select>
 
 	<resultMap type="ProductDTO" id="cartResult">
@@ -30,5 +31,14 @@
 			<result column="ORI_NAME" property="oriName"/>
 		</association>
 	</resultMap>
+
+	<!-- <delete id="delete" parameterType="CartDTO"> delete from "TB_CART" where "PRODUCT_NO" = #{productNo} and "USERNAME" = #{username} </delete> -->
+
+	<delete id="delete" parameterType="java.util.List">
+		delete from "TB_CART"
+		<foreach collection="list" item="item" open="where" separator="or">
+			"PRODUCT_NO" = #{item.productNo} and "USERNAME" = #{item.username}
+		</foreach>
+	</delete>
 
 </mapper>

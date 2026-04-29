@@ -13,9 +13,9 @@ btn.addEventListener('click', () => {
     })
         .then(res => res.text())
         .then(res => {
-			if(res.trim() == '1'){
+			if(res.trim() === '1'){
 				if(confirm('장바구니로 이동하시겠습니까?')){
-					location.href = '#'
+					location.href = '/cart/list'
 				} 
 			} else {
 				alret('실패')

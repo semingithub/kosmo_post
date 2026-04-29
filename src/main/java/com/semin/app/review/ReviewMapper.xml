@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.semin.app.review.ReviewMapper">
+	<insert id="add" parameterType="ReviewDTO">
+		insert into "TB_REVIEW"
+		values
+		(default, #{reviewContents}, #{reviewStar}, now(), #{productNo}, #{username})
+	</insert>
+
+	<select id="list" parameterType="long" resultType="ReviewDTO">
+		select *
+		from "TB_REVIEW"
+		where "PRODUCT_NO" = #{productNo}
+		order by "REVIEW_NO" desc
+	</select>
+</mapper>

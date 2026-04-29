@@ -24,8 +24,8 @@
 										<th>
 											<div>
 												<input type="checkbox" id="select">
-												<button id="btn" class="btn btn-primary">가입</button>
-												<button id="btn2" class="btn btn-danger">삭제</button>
+												<button id="btn" class="btn btn-primary">선택 가입</button>
+												<button id="btn2" class="btn btn-danger">선택 삭제</button>
 											</div>
 										</th>
 										<th>상품 이미지</th>
@@ -33,20 +33,7 @@
 										<th>상품 이율</th>
 									</tr>
 								</thead>
-								<tbody>
-									<c:forEach items="${list}" var="l">
-										<tr>
-											<td>
-												<input type="checkbox" class="select2" value="${l.productNo}">
-												<button id="btn3" class="btn btn-outline-danger">삭제</button>
-											</td>
-											<td>
-												<img src="/files/product/${l.file.fileName}" style="width:100px; height:100px;">
-											</td>
-											<td>${l.productName}</td>
-											<td>${l.productRate}</td>
-										</tr>
-									</c:forEach>
+								<tbody id="list">
 								</tbody>
 							</table>
 						</div>
