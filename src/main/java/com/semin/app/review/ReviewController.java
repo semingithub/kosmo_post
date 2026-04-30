@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.semin.app.member.MemberDTO;
 import com.semin.app.product.ReviewService;
@@ -31,13 +32,10 @@ public class ReviewController {
 	}
 
 	@PostMapping("add")
-	public String addReview(ReviewDTO reviewDTO, HttpSession session, Model model) throws Exception {
+	@ResponseBody
+	public int addReview(ReviewDTO reviewDTO, HttpSession session, Model model) throws Exception {
 
 		MemberDTO member = (MemberDTO) session.getAttribute("member");
-
-		if (member == null) {
-			return "redirect:/member/login";
-		}
 
 		reviewDTO.setUsername(member.getUsername());
 
@@ -45,21 +43,23 @@ public class ReviewController {
 
 		model.addAttribute("result", result);
 
-		return "commons/ajaxResult";
+		return result;
 	}
 	
 	@PostMapping("delete")
-	public String delete(ReviewDTO reviewDTO, Model model) throws Exception {
+	@ResponseBody
+	public int delete(ReviewDTO reviewDTO, Model model) throws Exception {
 		int result = reviewService.delete(reviewDTO);
 		model.addAttribute("result", result);
-		return "commons/ajaxResult";	
+		return result;	
 	}
 	
 	@PostMapping("update")
-	public String update(ReviewDTO reviewDTO, Model model) throws Exception {
+	@ResponseBody
+	public int update(ReviewDTO reviewDTO, Model model) throws Exception {
 		int result = reviewService.update(reviewDTO);
 		model.addAttribute("result", result);
-		return "commons/ajaxResult";	
+		return result;	
 	}
 
 }

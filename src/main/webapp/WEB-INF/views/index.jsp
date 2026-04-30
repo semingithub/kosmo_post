@@ -24,6 +24,7 @@
 					</c:if>
 					<!-- End Page Content container-fluid-->
 				</div>
+				<div id="map" style="width: 500px; height: 400px;"></div>
 				<!-- End Content-->
 			</div>
 			<c:import url="/WEB-INF/views/temp/footer.jsp"></c:import>
@@ -32,5 +33,20 @@
 		<!-- End wrapper -->
 	</div>
 	<c:import url="/WEB-INF/views/temp/footer_script.jsp"></c:import>
+	<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=8718278b1ae57e3d4c204aad5927d12a"></script>
+	<script>
+		kakao.maps.load(function() {
+
+			var container = document.getElementById('map');
+
+			var options = {
+				center : new kakao.maps.LatLng(33.450701, 126.570667),
+				level : 3
+			};
+
+			var map = new kakao.maps.Map(container, options);
+
+		});
+	</script>
 </body>
 </html>
