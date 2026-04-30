@@ -23,13 +23,11 @@ public class ReviewController {
 	private ReviewService reviewService;
 
 	@GetMapping("list")
-	public String list(@RequestParam("productNo") Long productNo, Model model) throws Exception {
+	public void list(ReviewDTO reviewDTO, Model model) throws Exception {
 
-		List<ReviewDTO> list = reviewService.list(productNo);
+		List<ReviewDTO> list = reviewService.list(reviewDTO);
 
 		model.addAttribute("list", list);
-
-		return "review/list"; // JSP 조각
 	}
 
 	@PostMapping("add")
@@ -43,12 +41,25 @@ public class ReviewController {
 
 		reviewDTO.setUsername(member.getUsername());
 
-		reviewService.add(reviewDTO);
+		int result = reviewService.add(reviewDTO);
 
-		List<ReviewDTO> list = reviewService.list(reviewDTO.getProductNo());
-		model.addAttribute("list", list);
+		model.addAttribute("result", result);
 
-		return "review/list";
+		return "commons/ajaxResult";
+	}
+	
+	@PostMapping("delete")
+	public String delete(ReviewDTO reviewDTO, Model model) throws Exception {
+		int result = reviewService.delete(reviewDTO);
+		model.addAttribute("result", result);
+		return "commons/ajaxResult";	
+	}
+	
+	@PostMapping("update")
+	public String update(ReviewDTO reviewDTO, Model model) throws Exception {
+		int result = reviewService.update(reviewDTO);
+		model.addAttribute("result", result);
+		return "commons/ajaxResult";	
 	}
 
 }

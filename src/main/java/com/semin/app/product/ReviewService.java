@@ -14,12 +14,19 @@ public class ReviewService {
 	@Autowired
 	private ReviewMapper reviewMapper;
 
-	public List<ReviewDTO> list(Long productNo) throws Exception {
-		return reviewMapper.list(productNo);
+	public List<ReviewDTO> list(ReviewDTO reviewDTO) throws Exception {
+		return reviewMapper.list(reviewDTO);
 	}
 
 	public int add(ReviewDTO reviewDTO) throws Exception {
 		return reviewMapper.add(reviewDTO);
 	}
+	
+	public int delete(ReviewDTO reviewDTO) throws Exception {
+		return reviewMapper.delete(reviewDTO);
+	}
 
+	public int update(ReviewDTO reviewDTO) throws Exception {
+		return reviewMapper.update(reviewDTO);
+	}
 }

@@ -38,7 +38,7 @@
 									<div class="input-group-prepend">
 										<span class="input-group-text" id="username">아이디</span>
 									</div>
-									<input type="text" class="form-control" placeholder="아이디를 입력하세요." name="username">
+									<input type="text" class="form-control" placeholder="아이디를 입력하세요." name="username" value="semin216">
 								</div>
 							</div>
 							<div>
@@ -46,7 +46,7 @@
 									<div class="input-group-prepend">
 										<span class="input-group-text" id="password">비밀번호</span>
 									</div>
-									<input type="password" class="form-control" placeholder="비밀번호를 입력하세요." name="password">
+									<input type="password" class="form-control" placeholder="비밀번호를 입력하세요." name="password" value="1234">
 								</div>
 							</div>
 							<div>

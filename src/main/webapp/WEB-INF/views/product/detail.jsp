@@ -42,21 +42,7 @@
 							</div>
 						</div>
 					</div>
-					<div id="review_list" class="table-responsive">
-						<table class="table table-bordered table-hover text-center">
-							<thead class="thead-dark">
-								<tr>
-									<th>번호</th>
-									<th>내용</th>
-									<th>별점</th>
-									<th>작성시간</th>
-									<th>작성자</th>
-								</tr>
-							</thead>
-							<tbody id="list" data-id="${detail.productNo}">
-							</tbody>
-						</table>
-					</div>
+					<div id="review_list" data-id="${detail.productNo}" class="table-responsive"></div>
 					<div>
 						<c:if test="${not empty member}">
 							<div id="review_write" data-id="${detail.productNo}">
@@ -85,6 +71,41 @@
 		</div>
 		<!-- End wrapper -->
 	</div>
+
+	<div>
+		<div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">리뷰 수정</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<textarea rows="" cols="" id="uContents"></textarea>
+						<div class="input-group mb-2">
+							<div class="input-group-prepend">
+								<span class="input-group-text">별점</span>
+							</div>
+							<select id="uStar" class="form-control">
+								<option value="5">★★★★★</option>
+								<option value="4">★★★★☆</option>
+								<option value="3">★★★☆☆</option>
+								<option value="2">★★☆☆☆</option>
+								<option value="1">★☆☆☆☆</option>
+							</select>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+						<button type="button" id="uBtn_update" class="btn btn-primary">수정</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<c:import url="/WEB-INF/views/temp/footer_script.jsp"></c:import>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="/js/cart/cart.js"></script>
