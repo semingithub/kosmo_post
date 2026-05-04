@@ -2,17 +2,19 @@ const add = document.getElementById('add')
 const result = document.getElementById('result')
 const create = document.getElementById('create')
 
-let no = 1
+let no = result.getAttribute("data-file-size")
 
 add.addEventListener('click', function() {
 
-    let d = document.createElement('div')
-    d.id = `id${no}`
 
-    if (d.id > 'id5') {
+    if (no > 4) {
         alert('최대 5개까지 생성가능합니다.')
+		return
     } else {
 
+        let d = document.createElement('div')
+        d.id = `id${no}`
+		
         let i = document.createElement('input')
         i.type = 'file'
         i.name = 'attach'
