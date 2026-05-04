@@ -69,5 +69,10 @@
 		delete from "TB_NOTICE"
 		where "BOARD_NUM" = #{boardNum}
 	</delete>
+	
+	<select id="fileDetail" parameterType="FileDTO" resultType="FileDTO">
+		select * from "TB_NOTICEFILE"
+		where "FILE_NUM" = #{fileNum}
+	</select>
 
 </mapper>

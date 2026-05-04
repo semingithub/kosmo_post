@@ -57,7 +57,7 @@ public class QnaService implements BoardService {
 			qnaFileDTO.setBoardNum(boardDTO.getBoardNum());
 			qnaFileDTO.setOriName(f.getOriginalFilename());
 			qnaFileDTO.setFileName(fileName);
-			
+
 			result = qnaMapper.createFile(qnaFileDTO);
 		}
 
@@ -80,11 +80,16 @@ public class QnaService implements BoardService {
 			fileManager.fileDelete(name, fileDTO);
 //			qnaMapper.fileDelete(fileDTO);
 		}
-		
+
 		qnaMapper.fileDeleteFor(boardDTO.getList());
 
 		int result = qnaMapper.delete(boardDTO);
 		return result;
+	}
+
+	@Override
+	public FileDTO fileDetail(FileDTO fileDTO) throws Exception {
+		return qnaMapper.fileDetail(fileDTO);
 	}
 
 }

@@ -26,7 +26,7 @@
 							<h5>${detail.boardWriter}</h5>
 							<div>${detail.boardContents}</div>
 							<c:forEach items="${detail.list}" var="f">
-								<h4><img src="/files/${image}/${f.fileName}"></h4>
+								<h4><a href="./down?fileNum=${f.fileNum}">${f.oriName}</a></h4>
 							</c:forEach>
 							<div>
 								<form action="./delete" method="post">

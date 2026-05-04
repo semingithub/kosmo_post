@@ -86,4 +86,9 @@
 			#{item.fileNum}
 		</foreach>
 	</delete>
+	
+	<select id="fileDetail">
+		select * from "TB_QNAFILE"
+		where "FILE_NUM" = #{fileNum}
+	</select>
 </mapper>

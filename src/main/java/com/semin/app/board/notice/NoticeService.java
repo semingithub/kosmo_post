@@ -86,5 +86,10 @@ public class NoticeService implements BoardService {
 		int result = noticeMapper.delete(boardDTO);
 		return result;
 	}
+	
+	@Override
+	public FileDTO fileDetail(FileDTO fileDTO) throws Exception {
+		return noticeMapper.fileDetail(fileDTO);
+	}
 
 }

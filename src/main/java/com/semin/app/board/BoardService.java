@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.semin.app.file.FileDTO;
 import com.semin.app.pager.Pager;
 
 @Service
@@ -19,5 +20,7 @@ public interface BoardService {
 	public int update(BoardDTO boardDTO, MultipartFile[] attach) throws Exception;
 
 	public int delete(BoardDTO boardDTO) throws Exception;
+	
+	public FileDTO fileDetail(FileDTO fileDTO) throws Exception;
 
 }

@@ -13,10 +13,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.semin.app.board.BoardDTO;
+import com.semin.app.file.FileDTO;
+import com.semin.app.member.MemberDTO;
 import com.semin.app.pager.Pager;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -26,11 +30,11 @@ import lombok.extern.slf4j.Slf4j;
 public class NoticeController {
 
 	@Value("${app.board.notice}")
-	public String image;
+	public String name;
 
-	@ModelAttribute("image")
+	@ModelAttribute("name")
 	public String getName() {
-		return this.image;
+		return this.name;
 	}
 
 	@Autowired
@@ -51,8 +55,8 @@ public class NoticeController {
 	}
 
 	@PostMapping("create")
-	public String create(NoticeDTO noticeDTO, @RequestParam(value="attach", required=false) MultipartFile[] attach, Model model)
-			throws Exception {
+	public String create(NoticeDTO noticeDTO, @RequestParam(value = "attach", required = false) MultipartFile[] attach,
+			Model model) throws Exception {
 		int result = noticeService.create(noticeDTO, attach);
 		if (result > 0) {
 			model.addAttribute("result", "글 등록 성공");
@@ -84,16 +88,36 @@ public class NoticeController {
 	}
 
 	@PostMapping("update")
-	public String update(NoticeDTO noticeDTO, @RequestParam("attach") MultipartFile[] attach) throws Exception {
+	public ModelAndView update(NoticeDTO noticeDTO, @RequestParam("attach") MultipartFile[] attach, Model model)
+			throws Exception {
 		int result = noticeService.update(noticeDTO, attach);
-		return "redirect:./list";
+
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("redirect:./list");
+		modelAndView.addObject("detail", noticeDTO);
+
+		return modelAndView;
 	}
 
 	@PostMapping("delete")
-	public String delete(NoticeDTO noticeDTO) throws Exception {
+	public String delete(NoticeDTO noticeDTO, HttpSession session, Model model) throws Exception {
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
+		BoardDTO boardDTO = noticeService.detail(noticeDTO);
+		if (boardDTO.getBoardWriter().equals(memberDTO.getUsername())) {
+			int result = noticeService.delete(noticeDTO);
+			return "redirect:./list";
+		} else {
+			model.addAttribute("result", "작성자가 아닙니다");
+			model.addAttribute("url", "./list");
+			return "commons/result";
+		}
 
-		int result = noticeService.delete(noticeDTO);
+	}
 
-		return "redirect:./list";
+	@GetMapping("down")
+	public String fileDown(NoticeFileDTO noticeFileDTO, Model model) throws Exception {
+		FileDTO fileDTO = noticeService.fileDetail(noticeFileDTO);
+		model.addAttribute("fileDTO", fileDTO);
+		return "fileDownView";
 	}
 }

@@ -14,13 +14,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.semin.app.board.BoardDTO;
 import com.semin.app.board.notice.NoticeDTO;
+import com.semin.app.file.FileDTO;
 import com.semin.app.pager.Pager;
 
 @Controller
 @RequestMapping("/qna/*")
 public class QnaController {
 	
-	@ModelAttribute("image")
+	@ModelAttribute("name")
 	public String getName() {
 		return "qna";
 	}
@@ -75,6 +76,13 @@ public class QnaController {
 		int result = qnaService.delete(qnaDTO);
 		
 		return "redirect:./list";
+	}
+	
+	@GetMapping("down")
+	public String fileDetail(QnaFileDTO qnaFileDTO, Model model) throws Exception {
+		FileDTO fileDTO = qnaService.fileDetail(qnaFileDTO);
+		model.addAttribute("fileDTO", fileDTO);
+		return "fileDownView";
 	}
 
 }

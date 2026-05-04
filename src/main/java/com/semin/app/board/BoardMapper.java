@@ -21,4 +21,6 @@ public interface BoardMapper {
 	
 	public int createFile(FileDTO fileDTO) throws Exception;
 	
+	public FileDTO fileDetail(FileDTO fileDTO) throws Exception;
+	
 }
