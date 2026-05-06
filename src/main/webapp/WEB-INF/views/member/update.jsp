@@ -34,38 +34,9 @@
 				<c:import url="/WEB-INF/views/temp/topbar.jsp"></c:import>
 				<!-- Page Content  -->
 				<div class="container-fluid">
-					<h1 class="h3 mb-4 text-gray-800">회원가입 페이지</h1>
+					<h1 class="h3 mb-4 text-gray-800">회원정보 수정 페이지</h1>
 					<div class="join-container">
 						<form:form method="post" modelAttribute="memberDTO" enctype="multipart/form-data">
-							<div>
-								<div class="input-group flex-nowrap">
-									<div class="input-group-prepend">
-										<span class="input-group-text">아이디</span>
-									</div>
-									<form:input path="username" cssClass="form-control" id="username" />
-								</div>
-								<form:errors path="username"></form:errors>
-							</div>
-							<div id="result"></div>
-							<div>
-								<div class="input-group flex-nowrap">
-									<div class="input-group-prepend">
-										<span class="input-group-text">비밀번호</span>
-									</div>
-									<form:password path="password" cssClass="form-control" id="password" />
-								</div>
-								<form:errors path="password"></form:errors>
-							</div>
-							<div id="pwdC">
-								<div class="input-group flex-nowrap">
-									<div class="input-group-prepend">
-										<span class="input-group-text">비밀번호 확인</span>
-									</div>
-									<form:password path="passwordCheck" cssClass="form-control" id="passwordCheck" />
-								</div>
-								<form:errors path="passwordCheck"></form:errors>
-							</div>
-							<div id="pwMsg"></div>
 							<div>
 								<div class="input-group flex-nowrap">
 									<div class="input-group-prepend">
@@ -98,7 +69,7 @@
 									<div class="input-group-prepend">
 										<span class="input-group-text">생일</span>
 									</div>
-									<input type="date" class="form-control" name="birth" id="birth">
+									<input type="date" class="form-control" name="birth" id="birth" value="${memberDTO.birth}">
 								</div>
 							</div>
 							<div class="form-group">
@@ -113,7 +84,7 @@
 									</div>
 								</div>
 							</div>
-							<button type="submit" class="btn btn-outline-primary" id="btn">회원가입</button>
+							<button type="submit" class="btn btn-outline-primary" id="btn">정보수정</button>
 						</form:form>
 					</div>
 					<!-- End Page Content container-fluid-->

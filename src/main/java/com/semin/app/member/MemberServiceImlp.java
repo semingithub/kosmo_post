@@ -3,6 +3,7 @@ package com.semin.app.member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.semin.app.file.FileManager;
@@ -18,6 +19,34 @@ public class MemberServiceImlp implements MemberService {
 
 	@Autowired
 	private FileManager fileManager;
+
+	@Override
+	public int update(MemberDTO memberDTO) throws Exception {
+		return memberMapper.update(memberDTO);
+	}
+
+	// 사용자 정의 검증 메서드
+	public boolean doubleCheck(MemberDTO memberDTO, BindingResult bindingResult) throws Exception {
+		// false: 통과, true: 실패
+		boolean result = false;
+
+		// annotation으로 검증한 결과 담기
+		result = bindingResult.hasErrors();
+
+		// password가 일치하는지 검증
+		if (!memberDTO.getPassword().equals(memberDTO.getPasswordCheck())) {
+			bindingResult.rejectValue("passwordCheck", "member.passwordCheck.notEqual");
+			result = true;
+		}
+
+		Object obj = memberMapper.detail(memberDTO);
+		if (obj != null) {
+			result = true;
+			bindingResult.rejectValue("username", "member.username.equal");
+		}
+
+		return result;
+	}
 
 	@Override
 	public int join(MemberDTO memberDTO, MultipartFile file) throws Exception {
@@ -39,19 +68,19 @@ public class MemberServiceImlp implements MemberService {
 
 		return result;
 	}
-	
+
 	@Override
 	public MemberDTO detail(MemberDTO memberDTO) throws Exception {
 		MemberDTO check = memberMapper.detail(memberDTO);
-		
-		if(check != null) {
-			if(check.getPassword().equals(memberDTO.getPassword())) {
+
+		if (check != null) {
+			if (check.getPassword().equals(memberDTO.getPassword())) {
 				return check;
 			}
-			
+
 			return null;
 		}
-		
+
 		return check;
 	}
 

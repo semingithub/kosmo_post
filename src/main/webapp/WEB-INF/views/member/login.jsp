@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,34 +33,38 @@
 				<div class="container-fluid">
 					<h1 class="h3 mb-4 text-gray-800">로그인 페이지</h1>
 					<div class="join-container">
-						<form action="./login" method="post">
+						<form:form action="./login" modelAttribute="memberDTO" method="post" enctype="mulitpart/form-data">
 							<div>
 								<div class="input-group flex-nowrap">
 									<div class="input-group-prepend">
-										<span class="input-group-text" id="username">아이디</span>
+										<!-- <span class="input-group-text" id="username">아이디</span> -->
+										<form:label path="username" cssClass="input-group-text" id="username">아이디</form:label>
 									</div>
-									<input type="text" class="form-control" placeholder="아이디를 입력하세요." name="username" value="semin216">
+									<form:input path="username" cssClass="form-control" />
+									<!-- <input type="text" class="form-control" placeholder="아이디를 입력하세요." name="username" value="semin216"> -->
 								</div>
+								<form:errors path="username"></form:errors>
 							</div>
 							<div>
 								<div class="input-group flex-nowrap">
 									<div class="input-group-prepend">
 										<span class="input-group-text" id="password">비밀번호</span>
 									</div>
-									<input type="password" class="form-control" placeholder="비밀번호를 입력하세요." name="password" value="1234">
+									<form:password path="password" cssClass="form-control" />
+									<!-- <input type="password" class="form-control" placeholder="비밀번호를 입력하세요." name="password" value="1234"> -->
 								</div>
+								<form:errors path="password"></form:errors>
 							</div>
-							<div>
-								<button type="submit" class="btn btn-outline-primary">로그인</button>
-						</form>
+							<button type="submit" class="btn btn-outline-primary">로그인</button>
+						</form:form>
 					</div>
 					<!-- End Page Content container-fluid-->
 				</div>
 				<!-- End Content-->
 			</div>
 			<!-- End content-wrapper -->
+			<c:import url="/WEB-INF/views/temp/footer.jsp"></c:import>
 		</div>
-		<c:import url="/WEB-INF/views/temp/footer.jsp"></c:import>
 		<!-- End wrapper -->
 	</div>
 	<c:import url="/WEB-INF/views/temp/footer_script.jsp"></c:import>

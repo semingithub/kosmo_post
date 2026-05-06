@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,16 +16,19 @@
 				<c:import url="/WEB-INF/views/temp/topbar.jsp"></c:import>
 				<!-- Page Content  -->
 				<div class="container-fluid">
-					<h1 class="h3 mb-4 text-gray-800">Blank Page</h1>
+					<h1 class="h3 mb-4 text-gray-800">Main Page</h1>
 					<c:if test="${not empty member}">
 						<h3>로그인 상태</h3>
+						<spring:message code="welcome.login" arguments="${member.username} ${member.birth}" argumentSeparator=" "></spring:message>
 					</c:if>
 					<c:if test="${empty member}">
 						<h3>비로그인 상태</h3>
 					</c:if>
+					<spring:message code="hi" text="code가 없을 때 출력하는 기본 메세지" var="m"></spring:message>
 					<!-- End Page Content container-fluid-->
 				</div>
 				<div id="map" style="width: 500px; height: 400px;"></div>
+				${m}
 				<!-- End Content-->
 			</div>
 			<c:import url="/WEB-INF/views/temp/footer.jsp"></c:import>

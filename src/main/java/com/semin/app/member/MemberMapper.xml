@@ -13,6 +13,19 @@
 		values(default, #{fileName}, #{oriName}, #{username})
 	</insert>
 
+	<update id="update" parameterType="MemberDTO">
+		update "TB_MEMBER"
+		<set>
+			<if test="name != null">"NAME" = #{name},</if>
+			<if test="password != null">"PASSWORD" = #{password},</if>
+			<if test="phone != null">"PHONE" = #{phone},</if>
+			<if test="email != null">"EMAIL" = #{email},</if>
+			<if test="birth != null">"BIRTH" = #{birth}</if>
+		</set>
+		where "USERNAME" = #{username}
+
+	</update>
+
 	<select id="detail" parameterType="MemberDTO" resultMap="detailResult">
 		select * from "TB_MEMBER" as m
 		left join "PROFILE" f
@@ -33,5 +46,5 @@
 			<result column="ORI_NAME" property="oriName"/>
 		</association>
 	</resultMap>
-	
+
 </mapper>

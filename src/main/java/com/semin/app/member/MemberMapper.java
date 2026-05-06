@@ -13,5 +13,6 @@ public interface MemberMapper {
 	
 	public MemberDTO idCheck(String username) throws Exception;
 
+	public int update(MemberDTO memberDTO) throws Exception;
 	
 }

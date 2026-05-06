@@ -37,6 +37,8 @@ dependencies {
     runtimeOnly 'org.glassfish.web:jakarta.servlet.jsp.jstl'
     // aop
 	implementation 'org.springframework.boot:spring-boot-starter-aop'
+	// validation
+	implementation("org.springframework.boot:spring-boot-starter-validation:4.1.0-RC1")
 }
 
 eclipse {
