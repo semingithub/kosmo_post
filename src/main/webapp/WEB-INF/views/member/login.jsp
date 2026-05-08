@@ -33,6 +33,9 @@
 				<div class="container-fluid">
 					<h1 class="h3 mb-4 text-gray-800">로그인 페이지</h1>
 					<div class="join-container">
+						<div>
+							<h3>${param.message}</h3>
+						</div>
 						<form action="/member/login" method="post" enctype="multipart/form-data">
 							<div>
 								<div class="input-group flex-nowrap">
@@ -41,7 +44,7 @@
 										<%-- <form:label path="username" cssClass="input-group-text" id="username">아이디</form:label> --%>
 									</div>
 									<%-- <form:input path="username" cssClass="form-control" /> --%>
-									<input type="text" class="form-control" placeholder="아이디를 입력하세요." name="username" value="semin">
+									<input type="text" class="form-control" placeholder="아이디를 입력하세요." name="username" value="${cookie.rememberId.value}">
 								</div>
 								<%-- <form:errors path="username"></form:errors> --%>
 							</div>
@@ -54,6 +57,14 @@
 									<input type="password" class="form-control" placeholder="비밀번호를 입력하세요." name="password" value="1234">
 								</div>
 								<%-- <form:errors path="password"></form:errors> --%>
+							</div>
+							<div class="form-group form-check">
+								<input type="checkbox" class="form-check-input" id="exampleCheck1" name="rememberId" value="1">
+								<label class="form-check-label" for="exampleCheck1">아이디 저장</label>
+							</div>
+							<div class="form-group form-check">
+								<input type="checkbox" class="form-check-input" id="exampleCheck1" name="rememberMe" >
+								<label class="form-check-label" for="exampleCheck1">자동 로그인</label>
 							</div>
 							<button type="submit" class="btn btn-outline-primary">로그인</button>
 						</form>
