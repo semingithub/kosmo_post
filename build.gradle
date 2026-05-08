@@ -38,7 +38,11 @@ dependencies {
     // aop
 	implementation 'org.springframework.boot:spring-boot-starter-aop'
 	// validation
-	implementation("org.springframework.boot:spring-boot-starter-validation:4.1.0-RC1")
+	implementation("org.springframework.boot:spring-boot-starter-validation")
+	// security
+	implementation("org.springframework.boot:spring-boot-starter-security")
+	// security taglibs
+	implementation("org.springframework.security:spring-security-taglibs")
 }
 
 eclipse {

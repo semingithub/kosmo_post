@@ -30,6 +30,10 @@
 		select * from "TB_MEMBER" as m
 		left join "PROFILE" f
 		using("USERNAME")
+		inner join "TB_MEMBER_ROLE"
+		using("USERNAME")
+		inner join "TB_ROLE"
+		using("ROLE_NUM")
 		where "USERNAME" = #{username}
 	</select>
 
@@ -40,11 +44,19 @@
 		<result column="PHONE" property="phone"/>
 		<result column="EMAIL" property="email"/>
 		<result column="BIRTH" property="birth"/>
+		<result column="ENABLED" property="enabled"/>
+		<result column="CREDENTIALS_NON_EXPIRED" property="credentialsNonExpired"/>
+		<result column="ACCOUNT_NON_LOCKED" property="accountNonLocked"/>
+		<result column="ACCOUNT_NON_EXPIRED" property="accountNonExpired"/>
 		<association property="profileDTO" javaType="ProfileDTO">
 			<id column="FILE_NUM" property="fileNum"/>
 			<result column="FILE_NAME" property="fileName"/>
 			<result column="ORI_NAME" property="oriName"/>
 		</association>
+		<collection property="roles" javaType="java.util.List" ofType="RoleDTO">
+			<id column="ROLE_NUM" property="roleNum"/>
+			<result column="ROLE_NAME" property="roleName"/>
+		</collection>
 	</resultMap>
 
 </mapper>

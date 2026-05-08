@@ -69,32 +69,13 @@ public class MemberController {
 			return "member/join";
 		}
 
-//		int result = memberService.join(memberDTO, attach);
+		int result = memberService.join(memberDTO, attach);
 		return "redirect:/";
 	}
 
 	@GetMapping("login")
-	public void login(@ModelAttribute MemberDTO memberDTO) throws Exception {
+	public void login(MemberDTO memberDTO) throws Exception {
 
-	}
-
-	@PostMapping("login")
-	public String login(@Valid MemberDTO memberDTO, HttpSession session) throws Exception {
-
-		memberDTO = memberService.detail(memberDTO);
-
-		if (memberDTO != null) {
-			session.setAttribute("member", memberDTO);
-		}
-
-		return "redirect:/";
-	}
-
-	@GetMapping("logout")
-	public String logout(HttpSession session) throws Exception {
-		session.invalidate();
-
-		return "redirect:/";
 	}
 
 	@GetMapping("idCheck")

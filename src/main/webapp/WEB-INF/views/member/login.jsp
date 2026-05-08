@@ -33,30 +33,30 @@
 				<div class="container-fluid">
 					<h1 class="h3 mb-4 text-gray-800">로그인 페이지</h1>
 					<div class="join-container">
-						<form:form action="./login" modelAttribute="memberDTO" method="post" enctype="mulitpart/form-data">
+						<form action="/member/login" method="post" enctype="multipart/form-data">
 							<div>
 								<div class="input-group flex-nowrap">
 									<div class="input-group-prepend">
-										<!-- <span class="input-group-text" id="username">아이디</span> -->
-										<form:label path="username" cssClass="input-group-text" id="username">아이디</form:label>
+										<span class="input-group-text" id="username">아이디</span>
+										<%-- <form:label path="username" cssClass="input-group-text" id="username">아이디</form:label> --%>
 									</div>
-									<form:input path="username" cssClass="form-control" />
-									<!-- <input type="text" class="form-control" placeholder="아이디를 입력하세요." name="username" value="semin216"> -->
+									<%-- <form:input path="username" cssClass="form-control" /> --%>
+									<input type="text" class="form-control" placeholder="아이디를 입력하세요." name="username" value="semin">
 								</div>
-								<form:errors path="username"></form:errors>
+								<%-- <form:errors path="username"></form:errors> --%>
 							</div>
 							<div>
 								<div class="input-group flex-nowrap">
 									<div class="input-group-prepend">
 										<span class="input-group-text" id="password">비밀번호</span>
 									</div>
-									<form:password path="password" cssClass="form-control" />
-									<!-- <input type="password" class="form-control" placeholder="비밀번호를 입력하세요." name="password" value="1234"> -->
+									<%-- form:password path="password" cssClass="form-control" /> --%>
+									<input type="password" class="form-control" placeholder="비밀번호를 입력하세요." name="password" value="1234">
 								</div>
-								<form:errors path="password"></form:errors>
+								<%-- <form:errors path="password"></form:errors> --%>
 							</div>
 							<button type="submit" class="btn btn-outline-primary">로그인</button>
-						</form:form>
+						</form>
 					</div>
 					<!-- End Page Content container-fluid-->
 				</div>

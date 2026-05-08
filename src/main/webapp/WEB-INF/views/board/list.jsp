@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,8 +16,17 @@
 				<c:import url="/WEB-INF/views/temp/topbar.jsp"></c:import>
 				<!-- Page Content  -->
 				<div class="container-fluid">
-					<h1 class="h3 mb-4 text-gray-800">${name} List Page</h1>
-					<button class="btn btn-primary" onclick="location.href='./create'">추가</button>
+					<h1 class="h3 mb-4 text-gray-800">${name}ListPage</h1>
+					<c:if test="${name eq 'notice'}">
+						<sec:authorize access="hasRole('ADMIN')">
+							<button class="btn btn-primary" onclick="location.href='./create'">추가</button>
+						</sec:authorize>
+					</c:if>
+					<c:if test="${name ne 'notice'}">
+						<sec:authorize access="hasRole('MEMBER')">
+							<button class="btn btn-primary" onclick="location.href='./create'">추가</button>
+						</sec:authorize>
+					</c:if>
 					<div class="row justify-content-center">
 						<div class="col-10">
 							<!-- 검색 폼 -->
@@ -69,15 +79,21 @@
 							<div class="row justify-content-center">
 								<nav aria-label="Page navigation example">
 									<ul class="pagination">
-										<li class="page-item ${pager.pre?'':'disabled'}"><a class="page-link" href="./list?page=${pager.pre ? pager.start-1 : pager.start}&search=${pager.search}&kind=${pager.kind}" aria-label="Previous">
+										<li class="page-item ${pager.pre?'':'disabled'}">
+											<a class="page-link" href="./list?page=${pager.pre ? pager.start-1 : pager.start}&search=${pager.search}&kind=${pager.kind}" aria-label="Previous">
 												<span aria-hidden="true">&laquo;</span>
-											</a></li>
+											</a>
+										</li>
 										<c:forEach begin="${pager.start}" end="${pager.end}" var="i">
-											<li class="page-item"><a class="page-link" href="./list?page=${i}&search=${pager.search}&kind=${pager.kind}">${i}</a></li>
+											<li class="page-item">
+												<a class="page-link" href="./list?page=${i}&search=${pager.search}&kind=${pager.kind}">${i}</a>
+											</li>
 										</c:forEach>
-										<li class="page-item ${pager.next?'':'disabled'}"><a class="page-link" href="./list?page=${pager.next ? pager.end+1 : pager.end}&search=${pager.search}&kind=${pager.kind}" aria-label="Next">
+										<li class="page-item ${pager.next?'':'disabled'}">
+											<a class="page-link" href="./list?page=${pager.next ? pager.end+1 : pager.end}&search=${pager.search}&kind=${pager.kind}" aria-label="Next">
 												<span aria-hidden="true">&raquo;</span>
-											</a></li>
+											</a>
+										</li>
 									</ul>
 								</nav>
 							</div>

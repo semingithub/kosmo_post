@@ -44,7 +44,7 @@ public class QnaController {
 	}
 
 	@PostMapping("create")
-	public String create(QnaDTO qnaDTO, @RequestParam("attach") MultipartFile[] attach) throws Exception {
+	public String create(QnaDTO qnaDTO, @RequestParam(name="attach", required = false) MultipartFile[] attach) throws Exception {
 		int result = qnaService.create(qnaDTO, attach);
 
 		return "redirect:./list";

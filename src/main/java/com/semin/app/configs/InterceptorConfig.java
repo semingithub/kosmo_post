@@ -31,9 +31,9 @@ public class InterceptorConfig implements WebMvcConfigurer{
 		
 		// member로 시작하는 모든 URL /  login, join은 제외
 		// qna list를 제외한 나머지들은 회원만 사용가능
-		registry.addInterceptor(loginCheckInterceptor)
-		.addPathPatterns("/member/*", "/qna/*", "/board/update")
-		.excludePathPatterns("/member/login", "/member/join", "/qna/list");
+//		registry.addInterceptor(loginCheckInterceptor)
+//		.addPathPatterns("/member/*", "/qna/*", "/board/update")
+//		.excludePathPatterns("/member/login", "/member/join", "/qna/list");
 		
 		registry.addInterceptor(writerCheckInterceptor)
 		.addPathPatterns("/board/update", "/qna/update");

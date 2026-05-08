@@ -2,14 +2,21 @@ package com.semin.app.member;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.semin.app.file.FileManager;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
-public class MemberServiceImlp implements MemberService {
+@Slf4j
+public class MemberServiceImlp implements MemberService, UserDetailsService {
 
 	@Value("${app.member}")
 	private String name;
@@ -19,7 +26,20 @@ public class MemberServiceImlp implements MemberService {
 
 	@Autowired
 	private FileManager fileManager;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		System.out.println(username);
+		MemberDTO memberDTO = new MemberDTO();
+		memberDTO.setUsername(username);
+		memberDTO = memberMapper.detail(memberDTO);
+		log.info("{}", memberDTO);
+		return memberMapper.detail(memberDTO);
+	}	
+	
 	@Override
 	public int update(MemberDTO memberDTO) throws Exception {
 		return memberMapper.update(memberDTO);
@@ -51,6 +71,7 @@ public class MemberServiceImlp implements MemberService {
 	@Override
 	public int join(MemberDTO memberDTO, MultipartFile file) throws Exception {
 		// DB에 저장
+		memberDTO.setPassword(passwordEncoder.encode(memberDTO.getPassword()));
 		int result = memberMapper.join(memberDTO);
 
 		// profile 이미지를 HDD에 저장
